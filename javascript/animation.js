@@ -1,4 +1,4 @@
-function ShowNumberWithAnimation(randx, randy, randNumber) {
+function ShowNumberWithAnimation(i, j, randNumber) {
     //获取当前的数字格
     var numberCell = $("#number-cell-" + i + "-" + j);
     //设置当前的数字格的背景色和前景色及数字值
@@ -12,4 +12,12 @@ function ShowNumberWithAnimation(randx, randy, randNumber) {
         top: getPosTop(i, j),
         left: getPosLeft(i, j)
     }, 50);
+}
+
+function showMoveAnimation(fromx, fromy, tox, toy) {
+    var numberCell = $("#number-cell-" + fromx + "-" + fromy);
+    numberCell.animate({
+        top: getPosTop(tox, toy),
+        left: getPosLeft(tox, toy)
+    }, 200);
 }

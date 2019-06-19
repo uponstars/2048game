@@ -37,8 +37,8 @@ function updateBoardView() {
     for (var i = 0; i < 4; i++) {
         for (var j = 0; j < 4; j++) {
             //向棋盘格上增加数字格
-            $("#grid-container").append("<div class='number-cell' id='number-cell-'"
-            + i + "-" + j + "></div>");
+            $("#grid-container").append("<div class='number-cell' id='number-cell-"
+            + i + "-" + j + "'></div>");
             var numberCell = $("#number-cell-" + i + "-" + j);
             //如果棋盘格的值为0的话，设置数字格高宽都为0
             if (board[i][j] == 0) {
