@@ -8,10 +8,22 @@ $(document).keydown(function (event) {
             }
             break;
         case 38://up
+            if (moveUp()) {
+                generateOneNumber();
+                isGameover();
+            }
             break;
         case 39://right
+            if (moveRight()) {
+                generateOneNumber();
+                isGameover();
+            }
             break;
         case 40://down
+            if (moveDown()) {
+                generateOneNumber();
+                isGameover();
+            }
             break;
     }
 });
@@ -44,4 +56,89 @@ function moveLeft() {
     }
     setTimeout("updateBoardView();", 200);
     return true;
+}
+
+function moveUp() {
+    //判断是否可以向上移动
+    if (!canMoveUp(board)) {
+        return false;
+    }
+    //完成向上移动的逻辑
+    for (var i = 1; i < 4; i++) {
+        for (var j = 0; j < 4; j++) {
+            if (board[i][j] != 0) {
+                for (var k = 0; k < i; k++) {
+                    if (board[k][j] == 0 && noBlokHorizontalRow(j, k, i, board)) {
+                        //才能向上移动
+                        showMoveAnimation(i, j, k, j);
+                        board[k][j] = board[i][j];
+                        board[i][j] = 0;
+                    } else if (board[k][j] == board[i][j] && noBlokHorizontalRow(j, k, i, board)){
+                        //才能向上移动
+                        showMoveAnimation(i, j, k, j);
+                        board[k][j] += board[i][j];
+                        board[i][j] = 0;
+                    }
+                }
+            }
+        }
+    }
+    setTimeout("updateBoardView();", 200);
+    return true;
+}
+
+function moveRight() {
+    //判断是否可以向右移动
+    if (!canMoveRight(board)) {
+        return false;
+    }
+    //完成向右移动的逻辑
+    for (var i = 3; i >= 0; i--) {
+        for (var j = 2; j >= 0; j--) {
+            if (board[i][j] != 0) {
+                for (var k = 3; k > j; k--) {
+                    if (board[i][k] == 0 && noBlokHorizontalColRev(i, k, j, board)) {
+                        //才能向上移动
+                        showMoveAnimation(i, j, i, k);
+                        board[i][k] = board[i][j];
+                        board[i][j] = 0;
+                    } else if (board[i][k] == board[i][j] && noBlokHorizontalColRev(i, k, j, board)){
+                        //才能向上移动
+                        showMoveAnimation(i, j, i, k);
+                        board[i][k] += board[i][j];
+                        board[i][j] = 0;
+                    }
+                }
+            }
+        }
+    }
+    setTimeout("updateBoardView();", 200);
+    return true;
+}
+
+function moveDown() {
+    //判断是否可以向下移动
+    if (!canMoveDown(board)) {
+        return false;
+    }
+    //完成向下移动的逻辑
+    for (var i = 2; i >= 0; i--) {
+        for (var j = 3; j >= 0; j--) {
+            if (board[i][j] != 0) {
+                for (var k = 3; k > i; k--) {
+                    if (board[k][j] == 0 && noBlokHorizontalRowRev(j, k, i, board)) {
+                        //才能向上移动
+                        showMoveAnimation(i, j, k, j);
+                        board[k][j] = board[i][j];
+                        board[i][j] = 0;
+                    } else if (board[k][j] == board[i][j] && noBlokHorizontalRowRev(j, k, i, board)){
+                        //才能向上移动
+                        showMoveAnimation(i, j, k, j);
+                        board[k][j] += board[i][j];
+                        board[i][j] = 0;
+                    }
+                }
+            }
+        }
+    }
 }
