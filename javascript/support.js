@@ -33,7 +33,7 @@ function getNumberColor(number) {
 
 function canMoveLeft(board) {
     for (var i = 0; i < 4; i++) {
-        for (var j = 1; i < 4; j++) {
+        for (var j = 1; j < 4; j++) {
             if (board[i][j - 1] == 0 || board[i][j - 1] == board[i][j]) {
                 return true;
             }

@@ -44,6 +44,7 @@ function moveLeft() {
                         showMoveAnimation(i, j, i, k);
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
+                        continue;
                     } else if (board[i][k] == board[i][j] && noBlokHorizontalCol(i, k, j, board)) {
                         //才能向左移动
                         showMoveAnimation(i, j, i, k);
@@ -52,6 +53,7 @@ function moveLeft() {
                         //add score
                         score += board[i][k];
                         updateScore(score);
+                        continue;
                     }
                 }
             }
@@ -76,6 +78,7 @@ function moveUp() {
                         showMoveAnimation(i, j, k, j);
                         board[k][j] = board[i][j];
                         board[i][j] = 0;
+                        continue;
                     } else if (board[k][j] == board[i][j] && noBlokHorizontalRow(j, k, i, board)){
                         //才能向上移动
                         showMoveAnimation(i, j, k, j);
@@ -84,6 +87,7 @@ function moveUp() {
                         //add score
                         score += board[k][j];
                         updateScore(score);
+                        continue;
                     }
                 }
             }
@@ -99,15 +103,16 @@ function moveRight() {
         return false;
     }
     //完成向右移动的逻辑
-    for (var i = 0; i < 4; i++) {
-        for (var j = 0; j < 3; j++) {
+    for (var i = 3; i >= 0; i--) {
+        for (var j = 2; j >= 0; j--) {
             if (board[i][j] != 0) {
-                for (var k = j + 1; k < 4; k++) {
+                for (var k = 3; k >= j + 1; k--) {
                     if (board[i][k] == 0 && noBlokHorizontalCol(i, j, k, board)) {
                         //才能向上移动
                         showMoveAnimation(i, j, i, k);
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
+                        continue;
                     } else if (board[i][k] == board[i][j] && noBlokHorizontalCol(i, j, k, board)){
                         //才能向上移动
                         showMoveAnimation(i, j, i, k);
@@ -116,6 +121,7 @@ function moveRight() {
                         //add score
                         score += board[i][k];
                         updateScore(score);
+                        continue;
                     }
                 }
             }
@@ -131,15 +137,16 @@ function moveDown() {
         return false;
     }
     //完成向下移动的逻辑
-    for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < 4; j++) {
+    for (var i = 2; i >= 0; i--) {
+        for (var j = 3; j >= 0; j--) {
             if (board[i][j] != 0) {
-                for (var k = i + 1; k < 4; k++) {
+                for (var k = 3; k >= j + 1; k--) {
                     if (board[k][j] == 0 && noBlokHorizontalRow(j, i, k, board)) {
                         //才能向上移动
                         showMoveAnimation(i, j, k, j);
                         board[k][j] = board[i][j];
                         board[i][j] = 0;
+                        continue;
                     } else if (board[k][j] == board[i][j] && noBlokHorizontalRow(j, i, k, board)){
                         //才能向上移动
                         showMoveAnimation(i, j, k, j);
@@ -148,6 +155,7 @@ function moveDown() {
                         //add score
                         score += board[k][j];
                         updateScore(score);
+                        continue;
                     }
                 }
             }

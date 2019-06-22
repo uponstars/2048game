@@ -1,2 +1,4 @@
 #ignore jquery
 javascript/jquery-1.11.0.js
+.vscode/
+debug.log
