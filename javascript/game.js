@@ -49,6 +49,9 @@ function moveLeft() {
                         showMoveAnimation(i, j, i, k);
                         board[i][k] += board[i][j];
                         board[i][j] = 0;
+                        //add score
+                        score += board[i][k];
+                        updateScore(score);
                     }
                 }
             }
@@ -78,6 +81,9 @@ function moveUp() {
                         showMoveAnimation(i, j, k, j);
                         board[k][j] += board[i][j];
                         board[i][j] = 0;
+                        //add score
+                        score += board[k][j];
+                        updateScore(score);
                     }
                 }
             }
@@ -93,20 +99,23 @@ function moveRight() {
         return false;
     }
     //完成向右移动的逻辑
-    for (var i = 3; i >= 0; i--) {
-        for (var j = 2; j >= 0; j--) {
+    for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 3; j++) {
             if (board[i][j] != 0) {
-                for (var k = 3; k > j; k--) {
-                    if (board[i][k] == 0 && noBlokHorizontalColRev(i, k, j, board)) {
+                for (var k = j + 1; k < 4; k++) {
+                    if (board[i][k] == 0 && noBlokHorizontalCol(i, j, k, board)) {
                         //才能向上移动
                         showMoveAnimation(i, j, i, k);
                         board[i][k] = board[i][j];
                         board[i][j] = 0;
-                    } else if (board[i][k] == board[i][j] && noBlokHorizontalColRev(i, k, j, board)){
+                    } else if (board[i][k] == board[i][j] && noBlokHorizontalCol(i, j, k, board)){
                         //才能向上移动
                         showMoveAnimation(i, j, i, k);
                         board[i][k] += board[i][j];
                         board[i][j] = 0;
+                        //add score
+                        score += board[i][k];
+                        updateScore(score);
                     }
                 }
             }
@@ -122,23 +131,30 @@ function moveDown() {
         return false;
     }
     //完成向下移动的逻辑
-    for (var i = 2; i >= 0; i--) {
-        for (var j = 3; j >= 0; j--) {
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 4; j++) {
             if (board[i][j] != 0) {
-                for (var k = 3; k > i; k--) {
-                    if (board[k][j] == 0 && noBlokHorizontalRowRev(j, k, i, board)) {
+                for (var k = i + 1; k < 4; k++) {
+                    if (board[k][j] == 0 && noBlokHorizontalRow(j, i, k, board)) {
                         //才能向上移动
                         showMoveAnimation(i, j, k, j);
                         board[k][j] = board[i][j];
                         board[i][j] = 0;
-                    } else if (board[k][j] == board[i][j] && noBlokHorizontalRowRev(j, k, i, board)){
+                    } else if (board[k][j] == board[i][j] && noBlokHorizontalRow(j, i, k, board)){
                         //才能向上移动
                         showMoveAnimation(i, j, k, j);
                         board[k][j] += board[i][j];
                         board[i][j] = 0;
+                        //add score
+                        score += board[k][j];
+                        updateScore(score);
                     }
                 }
             }
         }
     }
+}
+
+function isGameover () {
+
 }

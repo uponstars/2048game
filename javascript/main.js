@@ -1,4 +1,5 @@
 var board = new Array();
+var score = 0;
 
 $(function(){
     newgame();
