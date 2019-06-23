@@ -1,26 +1,28 @@
 var board = new Array();
+var hasConflicted = new Array();
 var score = 0;
 
 $(function(){
     newgame();
-    //生成两个随机位置的随机数字
-    generateOneNumber();
-    generateOneNumber();
 });
 
 function newgame() {
     //初始化棋盘格
     init();
-    //
+    //生成两个随机位置的随机数字
+    generateOneNumber();
+    generateOneNumber();
 }
 
 function init() {
     for (var i = 0; i < 4; i++) {
         //定义一个二维数组
         board[i] = new Array();
+        hasConflicted[i] = new Array();
         for (var j = 0; j < 4; j++) {
             //初始化小格子的值为0
             board[i][j] = 0;
+            hasConflicted[i][j] = false;
             //获取小格子的id
             var gridCell = $("#grid-cell-" + i + "-" + j);
             //通过getPosTop()方法设置每个格子距顶端的距离
@@ -30,6 +32,8 @@ function init() {
         }
     }
     updateBoardView();
+    score = 0;
+    $("#score").text(0);
 }
 
 function updateBoardView() {
@@ -56,6 +60,7 @@ function updateBoardView() {
                 numberCell.css("color", getNumberColor(board[i][j]));
                 numberCell.text(board[i][j]);
             }
+            hasConflicted[i][j] = false;
         }
     }
 }
